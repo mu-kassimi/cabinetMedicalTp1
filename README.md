@@ -182,41 +182,69 @@ Le fichier `data.sql` contient les données initiales :
 
 | Méthode | Endpoint | Description |
 |---------|----------|-------------|
-| GET | `/api/patients` | Récupérer tous les patients |
-| GET | `/api/patients/{id}` | Récupérer un patient par ID |
-| POST | `/api/patients` | Créer un nouveau patient |
-| PUT | `/api/patients/{id}` | Mettre à jour un patient |
-| DELETE | `/api/patients/{id}` | Supprimer un patient |
+| GET | `/api/v1/patients` | Récupérer tous les patients |
+| POST | `/api/v1/patients` | Créer un nouveau patient |
+
+**Exemple de requête POST** :
+```json
+{
+  "nom": "Ahmed Alami",
+  "dateNaissance": "1990-05-15",
+  "telephone": "0612345678",
+  "genre": "M"
+}
+```
 
 ### Endpoints Medecin
 
 | Méthode | Endpoint | Description |
 |---------|----------|-------------|
-| GET | `/api/medecins` | Récupérer tous les médecins |
-| GET | `/api/medecins/{id}` | Récupérer un médecin par ID |
-| POST | `/api/medecins` | Créer un nouveau médecin |
-| PUT | `/api/medecins/{id}` | Mettre à jour un médecin |
-| DELETE | `/api/medecins/{id}` | Supprimer un médecin |
+| GET | `/api/v1/medecins` | Récupérer tous les médecins |
+| POST | `/api/v1/medecins` | Créer un nouveau médecin |
+
+**Exemple de requête POST** :
+```json
+{
+  "nom": "Dr. Samira Bennani",
+  "specialite": "Cardiologue",
+  "email": "samira.bennani@cabinet.ma"
+}
+```
 
 ### Endpoints RendezVous
 
 | Méthode | Endpoint | Description |
 |---------|----------|-------------|
-| GET | `/api/rendezvous` | Récupérer tous les rendez-vous |
-| GET | `/api/rendezvous/{id}` | Récupérer un rendez-vous par ID |
-| POST | `/api/rendezvous` | Créer un nouveau rendez-vous |
-| PUT | `/api/rendezvous/{id}` | Mettre à jour un rendez-vous |
-| DELETE | `/api/rendezvous/{id}` | Supprimer un rendez-vous |
+| GET | `/api/v1/rendezvous` | Récupérer tous les rendez-vous |
+| POST | `/api/v1/rendezvous` | Créer un nouveau rendez-vous |
+
+**Exemple de requête POST** :
+```json
+{
+  "dateRdv": "2025-01-15",
+  "statut": "CONFIRME",
+  "patient": {
+    "id": 1
+  },
+  "medecin": {
+    "id": 2
+  }
+}
+```
 
 ### Endpoints Consultation
 
 | Méthode | Endpoint | Description |
 |---------|----------|-------------|
-| GET | `/api/consultations` | Récupérer toutes les consultations |
-| GET | `/api/consultations/{id}` | Récupérer une consultation par ID |
-| POST | `/api/consultations` | Créer une nouvelle consultation |
-| PUT | `/api/consultations/{id}` | Mettre à jour une consultation |
-| DELETE | `/api/consultations/{id}` | Supprimer une consultation |
+| POST | `/api/v1/consultations/create-from/{rdvId}` | Créer une consultation à partir d'un rendez-vous |
+
+**Exemple de requête POST** :
+```
+POST /api/v1/consultations/create-from/1
+Content-Type: text/plain
+
+Consultation cardiologique : Tension artérielle normale. Prescription de médicaments.
+```
 
 ---
 
@@ -263,4 +291,3 @@ Ce projet a permis de développer avec succès une application monolithique comp
 - Configuration externalisée pour une meilleure flexibilité
 - Documentation complète du code et de l'API
 - Base solide pour la transition vers les microservices
-
